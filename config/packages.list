@@ -1,0 +1,37 @@
+# =============================================================================
+#  Émulateurs installés EN PLUS de l'installation de base de RetroPie
+#  (« basic_install » fournit déjà les émulateurs principaux : NES, SNES,
+#  Mega Drive, Master System, Game Boy/Color/Advance, PS1, N64, arcade…)
+#
+#  Un identifiant RetroPie-Setup par ligne. « # » = commentaire.
+#  Pour voir la liste complète : sudo ~/RetroPie-Setup/retropie_setup.sh
+#  > Manage packages.
+#
+#  Un paquet en échec n'arrête pas l'installation : il est signalé à la fin.
+# =============================================================================
+
+# Arcade : MAME 2003-Plus, meilleure compatibilité que MAME 2003 et rapide sur Pi 3
+lr-mame2003-plus
+
+# Arcade / Neo Geo : FinalBurn Neo (CPS1, CPS2, Neo Geo…)
+lr-fbneo
+
+# Game Boy Advance : gpSP, plus léger que mGBA sur Pi 3
+lr-gpsp
+
+# SNES : Snes9x 2010, bon compromis précision / vitesse sur Pi 3
+lr-snes9x2010
+
+# PC Engine / TurboGrafx-16 (et CD avec BIOS)
+lr-beetle-pce-fast
+
+# Atari 2600
+lr-stella2014
+
+# Neo Geo Pocket / Color
+lr-beetle-ngp
+
+# Exemples de paquets optionnels, à décommenter si besoin :
+# lr-flycast          # Dreamcast : lent sur Pi 3, quelques jeux seulement
+# lr-ppsspp           # PSP : seulement les jeux 2D légers sur Pi 3
+# kodi                # Médiacentre, lançable depuis EmulationStation

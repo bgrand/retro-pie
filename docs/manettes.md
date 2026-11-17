@@ -1,0 +1,53 @@
+# Manettes
+
+## Premier démarrage
+
+Au premier lancement, EmulationStation affiche **« Welcome — No gamepads detected »**.
+
+1. Branchez la manette en USB (le plus simple pour la configuration).
+2. **Maintenez un bouton** jusqu'à ce que l'écran de configuration apparaisse.
+3. Appuyez sur chaque bouton demandé. Pour un bouton absent de la manette, **maintenez n'importe quel bouton** pour passer.
+4. **Hotkey Enable** : choisissez **Select**. C'est le bouton des raccourcis (tableau ci-dessous).
+5. Validez sur **OK**.
+
+Cette configuration est automatiquement reportée dans RetroArch, donc valable pour toutes les consoles.
+
+Pour reconfigurer plus tard : **Start** > *Configure Input*.
+
+> Conseil : désignez **A = bas** et **B = droite** (disposition Nintendo), quelle que soit votre manette. RetroPie associe les boutons par position, pas par nom.
+
+## Raccourcis en jeu (Hotkey = Select)
+
+| Combinaison | Action |
+|---|---|
+| **Select + Start** | Quitter le jeu, retour au menu |
+| **Select + R** | Sauvegarder l'état (save state) |
+| **Select + L** | Charger l'état |
+| **Select + ← / →** | Changer d'emplacement de sauvegarde |
+| **Select + X** | Menu RetroArch (options, shaders, triches…) |
+| **Select + B** | Réinitialiser le jeu (reset) |
+
+Ces raccourcis concernent les émulateurs RetroArch (`lr-*`), c'est-à-dire presque toutes les consoles. Pour **mupen64plus** (N64 autonome), seul **Select + Start** pour quitter est garanti.
+
+## Manettes Bluetooth
+
+1. Sur le Pi : **RetroPie** (dans le menu principal) > **Bluetooth** > *Register and Connect to Bluetooth Device*.
+2. Mettez la manette en mode appairage :
+   - **DualShock 4 / DualSense** : maintenir *Share* + *PS* jusqu'au clignotement rapide.
+   - **8BitDo** : voir la notice. En général *Start* + un bouton de mode (X = mode X-input, B = Switch…), puis le bouton d'appairage.
+   - **Manette Switch Pro** : maintenir le petit bouton de synchronisation sur la tranche.
+3. Sélectionnez-la dans la liste et choisissez *DisplayYesNo* si une méthode de sécurité est demandée.
+4. Configurez-la ensuite comme au premier démarrage (maintenir un bouton).
+
+Le Bluetooth 4.2 du Pi 3B+ partage son antenne avec le Wi-Fi 2,4 GHz. Si la manette **décroche ou a du lag** :
+- branchez le Pi en **Ethernet** ou passez le Wi-Fi en **5 GHz** ;
+- ou utilisez une manette avec **dongle USB 2,4 GHz** (8BitDo avec récepteur, manettes Logitech F710) : c'est la solution la plus fiable.
+
+## Deux joueurs ou plus
+
+Chaque manette se configure une fois (maintenir un bouton sur la nouvelle manette dans *Configure Input*). L'ordre des joueurs suit l'ordre de branchement ou de connexion. Pour le fixer : **RetroPie** > **RetroArch** > *Settings* > *Input* > *Port 1/2 Controls*.
+
+## Manette Xbox
+
+- **Filaire (Xbox 360 / One / Series en USB)** : fonctionne directement.
+- **Sans fil (Xbox One / Series en Bluetooth)** : nécessite le pilote *xpadneo*. Sur le Pi, lancez `sudo ~/RetroPie-Setup/retropie_setup.sh` > *Manage packages* > *driver* > *xpadneo*, puis appairez-la comme ci-dessus.

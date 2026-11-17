@@ -1,0 +1,32 @@
+# =============================================================================
+#  Réglages ajoutés à la fin de config.txt par install.sh
+#  (/boot/firmware/config.txt sous Bookworm, /boot/config.txt avant)
+#
+#  Ils sont insérés entre deux balises « retro-pie » : relancer
+#  ./install.sh --config-only remplace le bloc sans créer de doublon.
+#  Les commentaires et lignes vides de ce fichier ne sont pas recopiés.
+# =============================================================================
+
+# Démarrer la sortie HDMI même si la TV est éteinte ou sur une autre source
+# quand le Pi s'allume (sinon : écran noir en allumant la TV après le Pi).
+hdmi_force_hotplug=1
+
+# Mode HDMI « TV » : le son passe par le câble HDMI, pas par la prise jack.
+hdmi_drive=2
+
+# Supprime les bandes noires autour de l'image. Si l'image déborde de l'écran,
+# réglez d'abord la TV en mode « Just Scan / Plein écran / 1:1 », puis
+# seulement en dernier recours, passez cette valeur à 0.
+disable_overscan=1
+
+# Mémoire réservée au GPU : 256 Mo est la valeur conseillée par RetroPie
+# pour le Pi 3 (N64, PS1 en résolution plus élevée).
+gpu_mem=256
+
+# --- Options (décommenter si besoin) -----------------------------------------
+# Empêcher le Pi de basculer la TV sur son entrée HDMI au démarrage (CEC) :
+#hdmi_ignore_cec_init=1
+#
+# Overclocking : déconseillé sans ventilateur. Le 3B+ gagne peu (5–10 %).
+#arm_freq=1500
+#over_voltage=2

@@ -1,0 +1,22 @@
+# Jeux et BIOS : ne jamais les versionner (droits d'auteur + taille)
+roms/
+bios/
+BIOS/
+*.zip
+*.7z
+*.chd
+*.pbp
+*.iso
+*.bin
+*.cue
+
+# Archives produites par scripts/backup-saves.sh
+backups/
+*.tar.gz
+
+# Journal d'installation
+install.log
+
+# Configuration locale (identifiants, etc.)
+*.local
+.env

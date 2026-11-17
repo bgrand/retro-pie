@@ -1,0 +1,31 @@
+# =============================================================================
+#  Réglages appliqués à /opt/retropie/configs/all/retroarch.cfg
+#  (valables pour toutes les consoles émulées via RetroArch / libretro)
+#
+#  Format RetroArch : clé = "valeur"
+#  Une clé déjà présente est remplacée, sinon elle est ajoutée.
+#  Pour régler une seule console, éditer plutôt
+#  /opt/retropie/configs/<console>/retroarch.cfg sur le Pi.
+# =============================================================================
+
+# Pixels nets plutôt que lissés (plus fidèle sur une grande TV)
+video_smooth = "false"
+
+# Garder le format d'origine des jeux (4:3 pour la plupart)
+video_aspect_ratio_auto = "true"
+
+# Rembobinage désactivé : il consomme du CPU en permanence sur Pi 3
+rewind_enable = "false"
+
+# Pas de sauvegarde / chargement d'état automatique (évite d'écraser
+# une partie par erreur). Sauvegarde manuelle : Select + R / Select + L.
+savestate_auto_save = "false"
+savestate_auto_load = "false"
+
+# Pas de miniature à chaque sauvegarde d'état (plus rapide sur carte SD)
+savestate_thumbnail_enable = "false"
+
+# Les fichiers de sauvegarde restent à côté des ROM (défaut RetroPie),
+# ce qui les rend accessibles par le partage réseau « roms ».
+savefile_directory = "default"
+savestate_directory = "default"
