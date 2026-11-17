@@ -85,6 +85,67 @@ Pour la PS1 et la N64, ajoutez une manette à deux sticks (DualShock 4, 8BitDo P
 - **À deux** : branchez une deuxième manette identique et configurez-la de la même façon (maintenir un bouton sur la nouvelle manette dans *Configure Input*). Le joueur 1 est la première manette branchée. Pour fixer l'ordre, voir la section *Deux joueurs ou plus*.
 - **Une touche ne répond plus ou est mal placée** : **Start** > *Configure Input* et refaites la configuration. Elle remplace l'ancienne.
 
+## Manette HutoPi USB NES
+
+Manette filaire USB au style NES (réf. fabricant `KUBNES`). Elle est reconnue directement par le Pi, sans pilote. Elle n'a que **4 boutons** (A, B, Select, Start) et une croix : idéale pour les consoles 8 bits, trop limitée au-delà.
+
+### Configuration
+
+1. Branchez-la sur un port USB du Pi **avant** de l'allumer, ou à tout moment dans *Configure Input*.
+2. Maintenez un bouton, puis associez les touches comme ci-dessous.
+
+| Demandé par EmulationStation | Bouton de la manette |
+|---|---|
+| D-pad haut / bas / gauche / droite | Croix directionnelle |
+| Start / Select | Start / Select |
+| A / B | A / B |
+| X, Y, Left/Right Shoulder, Triggers, Thumbs, sticks analogiques | **absents** : maintenir un bouton pour passer |
+| Hotkey Enable | **Select** |
+
+### Raccourcis : ce qui change
+
+Sans boutons X, L et R, la plupart des raccourcis par défaut ne sont pas disponibles :
+
+| Raccourci | Avec cette manette |
+|---|---|
+| Select + Start (quitter) | ✅ fonctionne |
+| Select + B (reset) | ✅ fonctionne |
+| Select + ← / → (emplacement de sauvegarde) | ✅ fonctionne |
+| Select + R / Select + L (sauvegarder / charger) | ❌ pas de bouton R ni L |
+| Select + X (menu RetroArch) | ❌ pas de bouton X |
+
+**Solution recommandée : ouvrir le menu RetroArch avec Select + A.** Depuis ce menu, on peut sauvegarder et charger l'état (*Quick Menu* > *Save State* / *Load State*). Une fois la manette configurée, sur le Pi en SSH :
+
+```bash
+cd /opt/retropie/configs/all/retroarch-joypads/
+ls                        # repérer le fichier de la manette NES
+grep input_a_btn "NOM DU FICHIER.cfg"     # ex. : input_a_btn = "1"
+echo 'input_menu_toggle_btn = "1"' >> "NOM DU FICHIER.cfg"   # même numéro que input_a_btn
+```
+
+Le changement ne concerne que cette manette. Si vous refaites *Configure Input* pour elle, le fichier est régénéré et la ligne doit être ajoutée de nouveau.
+
+### Ce qu'elle permet de jouer
+
+| Console | Résultat |
+|---|---|
+| NES / Famicom | Parfait, c'est fait pour |
+| Master System, Game Boy / Color, PC Engine, Atari 2600, Neo Geo Pocket | Parfait (2 boutons suffisent) |
+| Game Gear | Parfait |
+| Game Boy Advance | Limité : L et R manquent, gênant dans beaucoup de jeux |
+| Mega Drive | Limité : 2 boutons sur 3 (C manque) |
+| SNES | Limité : X, Y, L, R manquent ; seuls quelques jeux restent jouables |
+| Arcade, Neo Geo | Seulement les jeux à 1 ou 2 boutons |
+| PlayStation 1, Nintendo 64 | Non |
+
+Pour les consoles 16 bits, la [manette HutoPi USB SNES](#manette-hutopi-usb-snes) est le complément naturel : les deux peuvent rester branchées en même temps.
+
+### Conseils
+
+- **Câble court** : prévoyez une **rallonge USB 2.0 de 2 à 3 m** pour jouer depuis le canapé.
+- **Diagonales** : comme sur la NES d'origine, la croix carrée rend les diagonales moins précises qu'une croix SNES. C'est sans conséquence sur les jeux NES, mais peut gêner sur les jeux de combat.
+- **À deux** : branchez une deuxième manette et configurez-la de la même façon (voir *Deux joueurs ou plus*).
+
 ## Manette Xbox
 
 - **Filaire (Xbox 360 / One / Series en USB)** : fonctionne directement.
