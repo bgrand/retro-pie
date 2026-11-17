@@ -13,7 +13,7 @@ retro-pie/
 │   └── retroarch.overrides  ← réglages RetroArch communs à toutes les consoles
 ├── scripts/
 │   ├── backup-saves.sh      ← sauvegarde des parties et de la config
-│   └── check-health.sh      ← température, alimentation, disque, jeux
+│   └── check-health.sh      ← température, alimentation, stockage, jeux
 └── docs/
     ├── emulateurs.md        ← consoles, dossiers, BIOS, performances sur Pi 3
     └── manettes.md          ← configuration, raccourcis, Bluetooth
@@ -160,6 +160,8 @@ Pour une sauvegarde automatique chaque nuit à 3 h, ajoutez une tâche planifié
 ```
 
 « Sous-tension » ou « bridage » ⇒ le problème vient de l'alimentation ou de la chauffe, pas de l'émulateur.
+
+Le script affiche aussi le **stockage** : total, utilisé et libre de la carte SD, de la partition de démarrage et d'un éventuel disque ou clé USB, ainsi que la place prise par les jeux. Le libre passe en jaune sous 20 % et en rouge sous 10 % (ou sous 1 Go sur la carte SD système). Une carte pleine peut empêcher les sauvegardes de parties et les mises à jour.
 
 **Mettre à jour RetroPie** : `sudo ~/RetroPie-Setup/retropie_setup.sh` > *Update*. Faites une sauvegarde avant.
 

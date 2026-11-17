@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
 #  État de santé du Raspberry Pi : température, alimentation, fréquence,
-#  espace disque et nombre de jeux par console.
+#  stockage (total et libre par support) et nombre de jeux par console.
 #
 #  À lancer sur le Pi :   ./scripts/check-health.sh
 #  À distance depuis un PC :
@@ -67,13 +67,56 @@ else
     echo "  vcgencmd indisponible"
 fi
 
-echo "=== Espace disque ==="
-df -h "$HOME" | awk 'NR==2 {printf "  %s utilisés sur %s (%s), %s libres\n", $3, $2, $5, $4}'
+echo "=== Stockage ==="
+# Affiche total / utilisé / libre d'un système de fichiers, avec une alerte
+# colorée quand il se remplit. Chaque support n'est affiché qu'une fois.
+human() { (( $1 == 0 )) && { echo "0 o"; return; }; numfmt --to=iec --suffix=o --format="%.1f" "$1" 2>/dev/null || echo "$1 o"; }
+seen_devs=" "
+show_fs() {
+    local label="$1" path="$2" dev total used avail pct c note
+    [[ -e "$path" ]] || return 0
+    read -r dev total used avail < <(df -PB1 "$path" 2>/dev/null | awk 'NR==2 {print $1, $2, $3, $4}')
+    [[ -n "${dev:-}" && "${total:-0}" -gt 0 ]] || return 0
+    [[ "$seen_devs" == *" $dev "* ]] && return 0
+    seen_devs+="$dev "
+    pct=$(( avail * 100 / total ))
+    # Moins de 10 % libre = alerte. Sur la carte SD système, moins de 1 Go
+    # libre aussi : RetroPie, les mises à jour et les sauvegardes en ont besoin.
+    if (( pct < 10 )) || { [[ "$path" == "/" ]] && (( avail < 1073741824 )); }; then
+        c=$red; note="presque plein !"
+    elif (( pct < 20 )); then
+        c=$yellow; note="à surveiller"
+    else
+        c=$green; note=""
+    fi
+    # Remplissage calculé en caractères (et non en octets) pour aligner
+    # les libellés accentués
+    local pad=$(( 22 - ${#label} )); (( pad < 1 )) && pad=1
+    printf "  %s%*s total %9s   utilisé %9s   ${c}libre %9s (%3d %%)${off} %s\n" \
+        "$label" "$pad" "" "$(human "$total")" "$(human "$used")" "$(human "$avail")" "$pct" "$note"
+}
+
+show_fs "Carte SD (système)" /
+if mountpoint -q /boot/firmware 2>/dev/null; then
+    show_fs "Démarrage" /boot/firmware
+elif mountpoint -q /boot 2>/dev/null; then
+    show_fs "Démarrage" /boot
+fi
+# Jeux stockés ailleurs que sur la carte SD (clé ou disque USB monté sur roms)
+show_fs "Dossier des jeux" "$ROMS_DIR"
+for m in /media/* /media/*/* /mnt/*; do
+    mountpoint -q "$m" 2>/dev/null && show_fs "USB $(basename "$m")" "$m"
+done
+
+if [[ -d "$ROMS_DIR" ]]; then
+    echo "  Place prise par les jeux : $(du -sh "$ROMS_DIR" 2>/dev/null | cut -f1)"
+fi
 
 echo "=== Jeux par console ==="
 if [[ -d "$ROMS_DIR" ]]; then
     total=0
     for d in "$ROMS_DIR"/*/; do
+        [[ -d "$d" ]] || continue
         n=$(find "$d" -maxdepth 2 -type f \
             ! -iname '*.srm' ! -iname '*.sav' ! -iname '*.state*' ! -iname '*.txt' \
             ! -iname '*.cfg' ! -iname '*.xml' ! -name '.*' | wc -l)
