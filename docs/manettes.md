@@ -47,6 +47,44 @@ Le Bluetooth 4.2 du Pi 3B+ partage son antenne avec le Wi-Fi 2,4 GHz. Si la mane
 
 Chaque manette se configure une fois (maintenir un bouton sur la nouvelle manette dans *Configure Input*). L'ordre des joueurs suit l'ordre de branchement ou de connexion. Pour le fixer : **RetroPie** > **RetroArch** > *Settings* > *Input* > *Port 1/2 Controls*.
 
+## Manette HutoPi USB SNES
+
+Manette filaire USB au style Super Nintendo (réf. fabricant `kubsnes`). Elle est reconnue directement par le Pi, sans pilote. C'est la manette idéale pour les consoles 8 et 16 bits.
+
+### Configuration
+
+1. Branchez-la sur un port USB du Pi **avant** de l'allumer, ou à tout moment dans *Configure Input*.
+2. Maintenez un bouton, puis associez les touches comme ci-dessous. La disposition est la même que sur une vraie SNES, donc les boutons portent les bons noms.
+
+| Demandé par EmulationStation | Bouton de la manette |
+|---|---|
+| D-pad haut / bas / gauche / droite | Croix directionnelle |
+| Start / Select | Start / Select |
+| A / B / X / Y | A / B / X / Y |
+| Left Shoulder / Right Shoulder | L / R |
+| Left Trigger, Right Trigger, Left/Right Thumb, sticks analogiques | **absents** : maintenir un bouton pour passer |
+| Hotkey Enable | **Select** |
+
+Selon les séries, la croix est vue comme des boutons ou comme un axe : ça n'a pas d'importance, il suffit d'appuyer sur la direction demandée.
+
+### Ce qu'elle permet de jouer
+
+| Console | Résultat |
+|---|---|
+| NES, SNES, Master System, Game Gear, Game Boy / Color / Advance, PC Engine, Atari 2600 | Parfait |
+| Mega Drive | Très bien : les 6 boutons tombent sur A, B, X, Y, L, R |
+| Arcade, Neo Geo | Bien pour la grande majorité des jeux |
+| PlayStation 1 | Jouable pour les jeux qui n'utilisent ni L2/R2 ni les sticks analogiques |
+| Nintendo 64 | Déconseillée : pas de stick analogique, pas de boutons C ni de gâchette Z |
+
+Pour la PS1 et la N64, ajoutez une manette à deux sticks (DualShock 4, 8BitDo Pro 2…). Chaque manette garde sa propre configuration.
+
+### Conseils
+
+- **Câble court** (environ 1,2 à 1,4 m) : prévoyez une **rallonge USB 2.0 de 2 à 3 m** pour jouer depuis le canapé.
+- **À deux** : branchez une deuxième manette identique et configurez-la de la même façon (maintenir un bouton sur la nouvelle manette dans *Configure Input*). Le joueur 1 est la première manette branchée. Pour fixer l'ordre, voir la section *Deux joueurs ou plus*.
+- **Une touche ne répond plus ou est mal placée** : **Start** > *Configure Input* et refaites la configuration. Elle remplace l'ancienne.
+
 ## Manette Xbox
 
 - **Filaire (Xbox 360 / One / Series en USB)** : fonctionne directement.
